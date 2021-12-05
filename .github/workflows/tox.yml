@@ -86,7 +86,7 @@ jobs:
       ${{ matrix.tox_env }}@${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
-      # fail-fast: false
+      fail-fast: false
       # max-parallel: 5
       # The matrix testing goal is to cover the *most likely* environments
       # which are expected to be used by users in production. Avoid adding a
@@ -98,7 +98,6 @@ jobs:
         # keep list sorted as it determines UI order too
         - 3.8
         - 3.9
-        - "3.10"
         # NOTE: Installing ansible under 3.10-dev is currently not
         # NOTE: possible because compiling cffi explodes.
         os:
@@ -117,13 +116,6 @@ jobs:
           devel: true
         - tox_env: py310
           os: ubuntu-20.04
-          python-version: "3.10"
-          devel: true
-        - tox_env: py38
-          os: macOS-latest
-          python-version: 3.8
-        - tox_env: py310
-          os: macOS-latest
           python-version: "3.10"
           devel: true
 
@@ -165,7 +157,7 @@ jobs:
         TOXENV: ${{ matrix.tox_env }}
     - name: Combine coverage data
       # produce a single .coverage file at repo root
-      run: coverage combine .tox/.coverage.*
+      run: coverage combine
     - name: Upload coverage data
       uses: codecov/codecov-action@v1
       with:
