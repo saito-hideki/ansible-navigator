@@ -191,7 +191,7 @@ repos:
     - manual
 
 - repo: https://github.com/pre-commit/mirrors-mypy.git
-  rev: v0.910-1
+  rev: v0.920
   hooks:
   - id: mypy
     additional_dependencies:
